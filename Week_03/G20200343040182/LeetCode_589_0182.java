@@ -1,7 +1,5 @@
-// 给定一个 N 叉树，返回其节点值的后序遍历。
 
-
-
+// 给定一个 N 叉树，返回其节点值的前序遍历。
 /*
 // Definition for a Node.
 class Node {
@@ -22,9 +20,10 @@ class Node {
 */
 class Solution {
 
-    // solv1: recursion
-    // public List<Integer> postorder(Node root) {
+    //solv1: recursion
+    // public List<Integer> preorder(Node root) {
     //     List<Integer> output = new ArrayList<> ();
+
     //     helper(root, output);
 
     //     return output;
@@ -33,34 +32,36 @@ class Solution {
     // public void helper(Node root, List<Integer> output) {
     //     if (root == null)
     //         return;
+        
+    //     output.add(root.val);
 
     //     for (Node child:root.children) {
     //         helper(child, output);
     //     }
-
-    //     output.add(root.val);
     // }
 
-    //solv2: interation using stack
-    public List<Integer> postorder(Node root) {
-        LinkedList<Integer> output = new LinkedList<> ();
+    //sovl2: iteration using stack
+    public List<Integer> preorder(Node root) {
+        List<Integer> output = new ArrayList<> ();
         Stack<Node> s = new Stack<> ();
-        s.push(root);
 
         if (root == null)
             return output;
-            
+
+        s.push(root);
         while (!s.isEmpty()) {
             Node peek = s.pop();
-            output.addFirst(peek.val);
-            
-            for(Node child:peek.children) {
-                s.push(child);
+            output.add(peek.val);
 
+            for (int i=peek.children.size()-1; i>=0; i--) {
+                s.push(peek.children.get(i));
             }
 
+
         }
-        
+    
+
         return output;
     }
+
 }
